@@ -16,10 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/:page?', ({ response, params }) => {
-    const page = params.page || 1;
+Route.get('/:page?([0-9]+)', ({ response, params }) => {
 
-    response.json({
-        'page': page,
-    });
 })
