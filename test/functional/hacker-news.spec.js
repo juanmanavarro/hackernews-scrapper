@@ -18,3 +18,12 @@ test('return page 1 if no page requested', async ({ assert, client }) => {
   assert.ownInclude(response.body[0], { id: '1' })
   assert.hasAllKeys(response.body[0], [ 'id', 'title', 'url' ])
 })
+
+test('return requested page with content', async ({ assert, client }) => {
+  const page = 2;
+  const response = await client.get(`/${page}`).end()
+
+  response.assertStatus(200)
+  assert.ownInclude(response.body[0], { id: `${( (page - 1 ) * 30 ) + 1}` })
+  assert.isAtLeast(response.body.length, 1)
+})

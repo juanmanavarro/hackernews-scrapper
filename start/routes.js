@@ -6,8 +6,10 @@ const Axios = use('axios')
 const Cherio = use('cheerio')
 
 Route.get('/:page([0-9]+)?', async ({ response, params }) => {
-    const page = await Axios.get('https://news.ycombinator.com/')
-    const $ = Cherio.load(page.data);
+    const page = params.page || 1;
+
+    const pageResponse = await Axios.get(`https://news.ycombinator.com/news?p=${page}`)
+    const $ = Cherio.load(pageResponse.data);
 
     const data = $('.athing').map((index, element) => {
         element = $(element);
