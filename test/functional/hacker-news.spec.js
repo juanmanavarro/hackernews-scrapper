@@ -27,3 +27,11 @@ test('return requested page with content', async ({ assert, client }) => {
   assert.ownInclude(response.body[0], { id: `${( (page - 1 ) * 30 ) + 1}` })
   assert.isAtLeast(response.body.length, 1)
 })
+
+test('return page without content', async ({ assert, client}) => {
+  const page = 2000;
+  const response = await client.get(`/${page}`).end()
+
+  response.assertStatus(200)
+  assert.lengthOf(response.body, 0)
+})
