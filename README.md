@@ -1,31 +1,53 @@
-# Adonis fullstack application
-
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+# Hackernews scrapper
 
 ## Setup
 
-Use the adonis command to install the blueprint
+0. Prerequisites
+
+- Node
+- npm
+
+1. Clone this repo
 
 ```bash
-adonis new yardstick
+git clone https://github.com/juanmanavarro/hackernews-scrapper.git
 ```
 
-or manually clone the repo and then run `npm install`.
+2. Install dependencies
 
+```bash
+cd hackernews-scrapper
+npm install
+```
 
-### Migrations
+3. Run migrations
 
-Run the following command to run startup migrations.
+```bash
+node ace migration:run
+```
 
-```js
-adonis migration:run
+## Usage
+
+0. Prerequisites
+
+- CURL installed
+
+1. Serve the app
+
+```bash
+npm start
+```
+
+2. Run tests
+
+```bash
+node ace test
+```
+
+3. Execute this command
+
+Replace __{page}__ with the page number you want to request. If no page number is setted, page 1 is requested.
+
+```bash
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3333/{page}
 ```
