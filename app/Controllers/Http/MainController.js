@@ -1,18 +1,13 @@
 'use strict'
 
-const { getPagePosts } = use('App/Helpers/scraper')
+const { responseData } = use('App/Helpers/response')
 
 class MainController {
     async index ({ request, response}) {
         const page = request.params.page || '1'
+        const posts = []
 
-        let posts = []
-
-        for (let index = 1; index <= page; index++) {
-            posts = posts.concat(await getPagePosts(index))
-        }
-
-        response.json(posts)
+        response.json(await responseData(page, posts))
     }
 }
 

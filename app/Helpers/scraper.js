@@ -21,7 +21,6 @@ const getPagePosts = async page => {
     })
 }
 
-// here for simplicity
 const transformPageData = pageResponseData => {
     let posts = []
 
