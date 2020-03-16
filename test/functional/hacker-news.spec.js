@@ -19,19 +19,14 @@ test('return page 1 if no page requested', async ({ assert, client }) => {
   assert.hasAllKeys(response.body[0], [ 'id', 'title', 'url' ])
 })
 
-test('return requested page with content', async ({ assert, client }) => {
-  const page = 2;
+test('return requested page and all newest posts', async ({ assert, client }) => {
+  const page = 10
   const response = await client.get(`/${page}`).end()
 
-  response.assertStatus(200)
-  assert.ownInclude(response.body[0], { id: `${( (page - 1 ) * 30 ) + 1}` })
-  assert.isAtLeast(response.body.length, 1)
-})
-
-test('return page without content', async ({ assert, client}) => {
-  const page = 2000;
-  const response = await client.get(`/${page}`).end()
+  const posts = response.body
 
   response.assertStatus(200)
-  assert.lengthOf(response.body, 0)
-})
+  assert.equal(posts[0].id, 1)
+  // assert.equal(posts.length)
+  assert.isAtMost(response.body.length, page * 30)
+}).timeout(0)
