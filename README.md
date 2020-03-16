@@ -13,6 +13,12 @@
 git clone https://github.com/juanmanavarro/hackernews-scrapper.git
 ```
 
+2. Create environment file
+
+```bash
+cp .env.example .env
+```
+
 2. Install dependencies
 
 ```bash
