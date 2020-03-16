@@ -20,13 +20,12 @@ test('return page 1 if no page requested', async ({ assert, client }) => {
 })
 
 test('return requested page and all newest posts', async ({ assert, client }) => {
-  const page = 10
+  const page = 2
   const response = await client.get(`/${page}`).end()
 
   const posts = response.body
 
   response.assertStatus(200)
   assert.equal(posts[0].id, 1)
-  // assert.equal(posts.length)
   assert.isAtMost(response.body.length, page * 30)
 }).timeout(0)
